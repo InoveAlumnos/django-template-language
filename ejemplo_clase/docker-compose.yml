@@ -36,13 +36,13 @@ services:
     # depends_on indica que este servicio depende de que primero inicie "db"
     depends_on: ["db"]
 
-  modulo_5:
+  modulo_6:
     # build es el lugar desde donde toma los archivos para generar la imagen.
     build: .
     # Imágen a utilizar:
-    image: modulo_5
+    image: modulo_6
     # Nombre del container:
-    container_name: modulo_5a
+    container_name: modulo_6
     # Comportamiento ante fallos y al iniciar el sistema:
     restart: always
     # Carpetas enlazadas:
@@ -57,5 +57,5 @@ services:
     # Control de consola:
     stdin_open: true
     tty: true
-    
+    depends_on: ["db"] 
     command: python marvel/manage.py runserver 0.0.0.0:8000
