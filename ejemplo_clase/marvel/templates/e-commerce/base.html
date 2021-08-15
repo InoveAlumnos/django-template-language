@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/e-commerce/css/base.css' %}">
+    <title>{% block title %}Marvel Comics e-commerce{% endblock %}</title>
+</head>
+
+<body>
+    <div id="sidebar">
+        {% block sidebar %}
+        <a href="{% url 'extendido' %}">
+            <img class="image" src="{% static 'e-commerce/img/marvel.svg' %}" alt="" height="20%" width="20%">
+        </a>
+        <br>
+        <div id="menu">
+
+            | <a href="{% url 'variables' %}">Variables</a>
+            | <a href="{% url 'variable-contexto' %}">Variable-contexto</a>
+            | <a href="{% url 'for' %}">For</a>
+            | <a href="{% url 'if' %}">If</a>
+            | <a href="{% url 'origen' %}">Origen</a>
+            | <a href="{% url 'destino' %}">Destino</a>
+            | <a href="{% url 'formulario' %}">Formulario</a>
+            | <a href="{% url 'base' %}">Base</a>
+            | <a href="{% url 'extendido' %}">Extendido</a> |
+            
+        </div>
+        {% endblock %}
+    </div>
+
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+    <footer>
+        <h3>Tomado de: <a
+                href="https://docs.djangoproject.com/en/3.2/ref/templates/language/#template-inheritance">Django
+                Template Language</a></h3>
+    </footer>
+</body>
+
+</html>

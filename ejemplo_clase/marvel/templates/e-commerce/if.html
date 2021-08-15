@@ -1,0 +1,29 @@
+<h1>Prueba de sentencia IF</h1>
+<p>La sentencia IF, admite también las varientes ELIF y ELSE</p>
+
+<h2>1. Probamos la sentencia IF/ELSE:</h2>
+<h3>Dada la siguiente lista:</h3>
+<h4>{{TEST_LIST}}</h4>
+
+<h4>Consultamos:</h4>
+{% if 'Inove ' in TEST_LIST %}
+    <p>Existe Inove en la lista :D</p>
+{% else %}
+    <p>No existe Inove en la lista :C</p>
+{% endif %}
+
+<h2>2. Probamos la sentencia IF/ELIF/ELSE con la variable "user":</h2>
+<p>La variable "user" va a tomar el valor del usuario que ha iniciado sesión en el sitio.</p>
+
+<h4>Consultamos: </h4>
+
+{% if user.is_superuser %}
+    <h2>Bienvenido superusuario {{user.username}}</h2>
+{% elif user.username != None %}
+    <h2>Bienvenido {{user.username}}</h2>
+{% else %}
+    <h2>Usuario no registrado, por favor, inicie sesión para poder navegar.</h2>
+{% endif %}
+
+<p>Para más información de "tag if" <a
+        href="https://docs.djangoproject.com/en/3.2/ref/templates/builtins/#if">Aquí</a> </p>

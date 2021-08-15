@@ -1,0 +1,19 @@
+<h1>Variables personalizadas en context</h1>
+<p>La función get_context_data() puede ser sobrecargada para agregar la información y los procesos que necesitemos</p>
+
+<h2>Variable personalizada prueba_lista</h2>
+<p>Para acceder a las listas debemos utilizar los índices:</p>
+<ul>
+    <li>prueba_lista.0 : {{prueba_lista.0}}</li>
+    <li>prueba_lista.1 : {{prueba_lista.1}}</li>
+    <li>prueba_lista.2 : {{prueba_lista.2}}</li>
+</ul>
+<h2>Variable personalizada prueba_diccionario</h2>
+<p>Para acceder a las listas debemos utilizar los índices:</p>
+<ul>
+    <li>prueba_diccionario.0 : {{prueba_diccionario.saludo}}</li>
+    <li>prueba_diccionario.1 : {{prueba_diccionario.usuario}}</li>
+</ul>
+
+<p>Para más información de "get_context_data :" <a
+        href="https://docs.djangoproject.com/en/3.2/topics/class-based-views/generic-display/#adding-extra-context">Aquí</a> </p>

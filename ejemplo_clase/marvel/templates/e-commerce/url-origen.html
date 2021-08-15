@@ -1,0 +1,15 @@
+<h1>Prueba de etiqueta "url"</h1>
+<p>Las etiquetas "url" nos sirven para poder hacer referencia a una url interna de urls.py por su atributo "name",
+        ejemplo:
+<ul>
+        <li> path('url-origen', UrlOrigenView.as_view(), name='destino'),
+        </li>
+</ul>
+</p>
+
+<h2>1. Esta es la página de origen de prueba</h2>
+<h3>Dada la siguiente lista:</h3>
+<h4><a href="{% url 'destino' %}">Página de destino</a></h4>
+
+<p>Para más información de "tag if" <a href="https://docs.djangoproject.com/en/3.2/ref/templates/builtins/#url">Aquí</a>
+</p>

@@ -1,0 +1,64 @@
+/* Variables en CSS: 
+se declaran empezando con "--" por ejemplo: 
+--mi-variable: valor;
+Debe ser dentro de :root
+Las invocamos:
+var(--mi-variable)
+*/
+
+:root{
+--main-background:rgb(185, 185, 185);
+--second-background: rgb(63, 63, 63);
+--main-font-color: black;
+--light-font-color: rgb(219, 219, 219);
+--link-font-color: rgb(255, 86, 86);
+}
+
+/* Podemos afectar todas las etiquetas de HTML de esta forma: */
+body{
+    background-color: var(--main-background);
+    color: var(--main-font-color);
+}
+
+a{
+    color: var(--link-font-color);
+ }
+  
+a:hover{
+    color: red;
+ }
+a:active{
+    color: blue;
+ }
+
+/* Usando el selector por "id", tenemos que llamar al id del elemento HTML
+utilizando "#" por ejemplo: 
+#sidebar{
+    ...
+}
+*/
+
+#sidebar{
+    background-color: var(--second-background);
+    border-radius: 5px;
+}
+
+#menu{
+    padding: 10px;
+    color: var(--light-font-color);
+
+}
+
+
+
+/* Usando el selector por "class", tenemos que llamar a la clase del elemento HTML
+utilizando "." por ejemplo: 
+.image{
+    ...
+}
+*/
+
+.image{
+    padding: 10px;
+    border-radius: 15px;
+}

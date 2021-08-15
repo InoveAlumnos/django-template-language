@@ -1,0 +1,42 @@
+<h1>Prueba de etiqueta "csrf_token"</h1>
+<p>Los formularios de tipo POST necesitan enviarse con esta etiqueta, que envía un token de seguridad para evitar que
+    bots u otros usuarios envíen datos al endpoint de "action" a nuestros formularios.
+    <a href="https://www.ionos.es/digitalguide/servidores/seguridad/cross-site-request-forgery/">Más información acerca
+        de CSRF</a>
+</p>
+
+<h2>Dado el siguiente formulario CON ETIQUETA "csrf_token":</h2>
+
+<form action="{% url 'formulario' %}" method="POST">{% csrf_token %}
+    <label for="nombre">Nombre:</label><br>
+    <input type="text" id="nombre" name="Nombre" value="Leon"><br>
+    <label for="apellido">Apellido:</label><br>
+    <input type="text" id="apellido" name="Apellido" value="Kennedy"><br><br>
+    <input type="submit" value="Enviar">
+</form>
+
+<h2>Ahora el formulario SIN "csrf_token":</h2>
+
+<form action="{% url 'formulario' %}" method="POST">
+    <label for="nombre">Nombre:</label><br>
+    <input type="text" id="nombre" name="Nombre" value="Leon"><br>
+    <label for="apellido">Apellido:</label><br>
+    <input type="text" id="apellido" name="Apellido" value="Kennedy"><br><br>
+    <input type="submit" value="Enviar">
+</form>
+
+
+<h2>Información del request:</h2>
+
+<ul>
+    {% for key, value in request.POST.items%}
+
+    <li>{{key}} : {{value}}</li>
+
+    {% endfor %}
+
+</ul>
+
+<p>Para más información de "tag csrf_token" <a
+        href="https://docs.djangoproject.com/en/3.2/ref/csrf/#module-django.middleware.csrf">Aquí</a>
+</p>

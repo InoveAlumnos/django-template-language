@@ -1,0 +1,27 @@
+<h1>Ejemplos de uso de variables.</h1>
+
+<h2>Variable "user"</h2>
+<ul>
+    <li>Username: {{user.username}}</li>
+    <li>Password: {{user.password}}</li>
+    <li>Request{{request.GET}}</li>
+</ul>
+
+
+<h2>Variable "request"</h2>
+<p>Si introducimos en la url alguna variable, podremos verla en el QueryDict, sin embargo para el tipo POST, tenemos que
+    enviarlo por ese método, por medio de un formulario</p>
+<ul>
+    <li>request.GET :{{request.GET}}</li>
+    <li>request.POST :{{request.POST}}</li>
+    <li>request.encoding :{{request.encoding}}</li>
+    <li>request.path_info :{{request.path_info}}</li>
+    <li>request.scheme :{{request.scheme}}</li>
+    <li>request.method :{{request.method}}</li>
+    <li>request.headers :{{request.headers}}</li>
+    <li>request.content_params :{{request.content_params}}</li>
+    <li>request.META.HTTP_HOST :{{request.META.HTTP_HOST}}</li>
+    <li>request.META.CONTENT_TYPE :{{request.META.HTTP_HOST}}</li>
+
+</ul>
+<p>Para más información de "HttpRequest:" <a href="https://docs.djangoproject.com/en/3.2/ref/request-response/#module-django.http">Aquí</a> </p>

@@ -1,0 +1,37 @@
+<h1>Prueba de bucle FOR</h1>
+<p>El bucle for en los templates se utilizan en mayor medida para generar listas o tablas que tienen un contenido dinámico</p>
+
+<h2>1. Probamos en una variable personalizada en el contexto:</h2>
+<h3>Dada la siguiente lista:</h3>
+<h6>{{TEST_LIST}}</h4>
+<p>Iteramos:</p>
+<p>En medio de un parrafo, podríamos incluir un mensaje como: 
+"
+{% for item in TEST_LIST %}
+    {{item}}
+    {% endfor %}
+"
+    y luego cerrar.
+</p>
+
+<h2>2. Probamos en otra variable personalizada en el contexto:</h2>
+<h3>Dado el siguiente diccionario:</h3>
+<h4>{{TEST_DIC}}</h4>
+<p>Iteramos:</p>
+<ul>
+{% for k, v in TEST_DIC.items %}
+    <li>{{k}} : {{v}} </li>
+    {% endfor %}
+</ul>
+
+<h2>3. Utilizamos el FOR para obtener los valores de la variable "request.headers"</h2>
+<ul>
+{% for k,v in request.headers.items %}
+    <li>{{k}} : {{v}} </li>
+    {% endfor %}    
+</ul>
+
+
+
+<p>Para más información de "tag for" <a
+        href="https://docs.djangoproject.com/en/3.2/ref/templates/builtins/#for">Aquí</a> </p>
