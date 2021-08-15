@@ -4,7 +4,7 @@ info@inove.com.ar\
 Web: [Inove](http://inove.com.ar)
 
 ---
-# Tarea: Django - Modelos y Administrador
+# Tarea: Django - Template Language
 
 Al realizar esta tarea pondremos en práctica los conocimientos adquiridos en clase.
 Una vez finalizada, el alumno debe subir el enlace a su repositorio "forkeado" el foro de tarea correspondiente -NO SE ADMITE LA DEVOLUCIÓN POR OTRO CANAL SALVO SE ESPECIFIQUE LO CONTRARIO- 
@@ -13,26 +13,28 @@ Recuerde que no debe subir la base de datos al sistema, para ello se encuentra e
 
 ---
 
-### 1. Utilizar el proyecto de "Marvel" visto en clase.
-Descargar el repositorio del material visto en clase, hacer que levante y configurarlo para que el mismo
-pueda trabajar con una base de datos de tipo "Postgres".
-Modifique las credenciales para el acceso en el archivo docker-compose.yml y haga que la aplicación pueda utilizarlas.
+### 1. Completar el archivo base.html.
+En la carpeta de templates/e-commerce/ se encuentra el template "base.html" vacío
+Genere un template base para su aplicación, puede usar como base el utilizado en el ejemplo de clase.
 
-### 2. Realizar las migraciones del sistema.
-Recuerde que para poder comenzar a utilizar el Django Admin, es necesario que el sistema se encuentre alineado con la base de datos. Para ello debemos realizar las migraciones de la aplicación y crear un nuevo superusuario.
-Los comandos necesarios se encuentran detallados en el archivo README.md
 
-### 3. Habilitar las entidades en models.py
-Habilite las entidades creadas en clase "Comic" y "wish_list" que se encuentran comentadas en el archivo models.py.
+### 2. Genere templates hijos y sus vistas.
+Una vez generado el template base, genere templates hijos para su aplicación, remplazando los bloques que crea necesarios.
 
-### 4. Personalice el administrador de Django.
-Familiarícese con la aplicación, personalice el administrador de Django utilizando los atributos de admin.py.
+Debe generar como mínimo 5 templates para su aplicación, ellos serán para las páginas:
+* login: para inicio de sesión del usuario (puede reutilizar el formulario de la tarea de la clase anterior)
+* thanks: un mensaje de agradecimiento por su compra
+* user: debe listar los datos del usuario logueado
+* cart: debe listar los comics en el carrito de dicho usuario
+* wish: debe listar los comics favoritos de dicho usuario
 
-### 5. Genere una nueva entidad en models.py 
-Diseñe una nueva entidad en models.py, colóquele el nombre que usted prefiere y agréguele al menos 5 campos (columnas en la tabla resultante). Debe utilizar al menos un Forign Key.
+Para cada template debe generar una vista en donde recomendamos utilizar el método visto en clase **"get_context_data()"** para realizar la lógica de negocio (consultas, calculos, etc;).
 
-### 6. Nueva entidad en Django Admin.
-Haga que la nueva entidad aparezca en el administrador de Django, recuerde realizar las migraciones previamente y lo trabajado en admin.py
+### 3. Asignar las urls a las páginas creadas.
+Debe asignar las urls para cada página, así mismo, debe asignarles un "name" para cada endpoint.
+
+### 4. Personalice el estilo del sitio.
+Modifique el archivo base.css brindado para personalizar el estilo del sitio a su gusto y suba una captura de pantalla al foro de tarea del campus.
 
 ---
 
