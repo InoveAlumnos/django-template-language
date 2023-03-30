@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-# NOTE: importamos Templateview para darle una view a Swagger 
-from django.views.generic import TemplateView
-from rest_framework.schemas import get_schema_view
+
+from rest_framework import permissions
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
 
 
 
@@ -28,29 +29,39 @@ description = '''
 <h2>Documentación general de APIs de la aplicación e-commerce</h2>
 <p>Para la autenticación por medio de TOKENS debemos agregar en el header:
 </br>
-<ul><li>'Authorization': 'Token 92937874f377a1ea17f7637ee07208622e5cb5e6'</li></ul>
+<ul><li><b>Authorization'</b>: 'Token 92937874f377a1ea17f7637ee07208622e5cb5e6'</li></ul>
 </br>
-Donde 92937874f377a1ea17f7637ee07208622e5cb5e6 es un ejemplo del Token Key. 
+Donde <b>92937874f377a1ea17f7637ee07208622e5cb5e6</b> es un ejemplo del <b>Token Key</b>. 
 </p>
 '''
 
+schema_view = get_schema_view(
+   openapi.Info(
+      title="Inove Marvel e-commerce",
+      default_version='1.0.0',
+      description=description,
+      contact=openapi.Contact(email="info@inove.com.ar"),
+      license=openapi.License(name="Inove Coding School."),
+   ),
+   public=True,
+   permission_classes=(permissions.IsAuthenticatedOrReadOnly,),
+)
 
 urlpatterns = [
-    # Django default urls:
+    # Admin:
     path('admin/', admin.site.urls),
-
-    # e-commerce app urls:
-    path('e-commerce/',include('e_commerce.api.urls')),
-    path('e-commerce/',include('e_commerce.urls')),
-    
-    # swagger app urls:
-    path('api-docs/', TemplateView.as_view(
-        template_name='api-docs/swagger-ui.html',
-        extra_context={'schema_url':'openapi-schema'}
-    ), name='swagger-ui'),
-     path('openapi', get_schema_view(
-        title="Inove Marvel e-commerce",
-        description=description,
-        version="1.0.0"
-    ), name='openapi-schema'),
+    # e_commerce app:
+    path('e-commerce/', include('e_commerce.api.urls')),
+    path('e-commerce/', include('e_commerce.urls')),
+    # Documentación de APIs:
+    path(
+        'api-docs/swagger',
+        schema_view.with_ui('swagger', cache_timeout=0),
+        name='schema-swagger-ui'
+    ),
+    path(
+        'api-docs/redoc',
+        schema_view.with_ui('redoc', cache_timeout=0),
+        name='schema-redoc'
+    ),
 ]

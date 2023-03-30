@@ -15,8 +15,46 @@ TEST_DIC = {
 TEST_LIST = ['Hola, ', 'mi ', 'nombre ', 'es ', 'Inove ']
 
 
+# NOTE: Generamos las vistas genéricas para probar bloques HTML:
+class PruebaView(TemplateView):
+    template_name = 'e-commerce/hello.html'
+
+
+class TextView(TemplateView):
+    template_name = 'e-commerce/00-text.html'
+
+
+class LinksView(TemplateView):
+    template_name = 'e-commerce/01-links.html'
+
+
+class ListsView(TemplateView):
+    template_name = 'e-commerce/02-listas.html'
+
+
+class ButtonsView(TemplateView):
+    template_name = 'e-commerce/03-buttons.html'
+
+
+class TableView(TemplateView):
+    template_name = 'e-commerce/04-table.html'
+
+
+class FormView(TemplateView):
+    template_name = 'e-commerce/05-form.html'
+
+
+class ImageView(TemplateView):
+    template_name = 'e-commerce/06-images.html'
+
+
+class ExampleView(TemplateView):
+    template_name = 'e-commerce/example.html'
+
+
 class VariablesView(TemplateView):
     template_name = 'e-commerce/variables.html'
+
 
 class VariableDeContextoView(TemplateView):
     template_name = 'e-commerce/variable-contexto.html'
@@ -40,6 +78,7 @@ class VariableDeContextoView(TemplateView):
             'saludo': 'hola, mi nombre es: ', 'usuario': f'{self.request.user.username}'.upper()}
         return context
 
+
 class ForView(TemplateView):
     template_name = 'e-commerce/for.html'
 
@@ -50,7 +89,6 @@ class ForView(TemplateView):
         return context
 
 # NOTE: Generamos el template base para extender:
-
 class IfView(TemplateView):
     template_name = 'e-commerce/if.html'
 
@@ -63,8 +101,10 @@ class IfView(TemplateView):
 class UrlOrigenView(TemplateView):
     template_name = 'e-commerce/url-origen.html'
 
+
 class UrlDestinoView(TemplateView):
     template_name = 'e-commerce/url-destino.html'
+
 
 class CsrfTokenFormView(CreateView):
     '''
@@ -76,8 +116,10 @@ class CsrfTokenFormView(CreateView):
     fields = ['username']
     template_name = 'e-commerce/csrf-form.html'
 
+
 class BaseView(TemplateView):
     template_name = 'e-commerce/base.html'
+
 
 class ExtendidoView(TemplateView):
     template_name = 'e-commerce/extendido.html'
