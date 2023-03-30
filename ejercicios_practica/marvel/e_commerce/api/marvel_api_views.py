@@ -1,12 +1,17 @@
-# Import models:
-from e_commerce.models import *
-
-from marvel.settings import VERDE, CIAN, AMARILLO
-from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_exempt
 import requests
 import json
 import hashlib
+
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+
+from rest_framework.decorators import api_view, renderer_classes
+from rest_framework.renderers import TemplateHTMLRenderer
+from drf_yasg.utils import swagger_auto_schema
+
+from e_commerce.models import *
+from marvel.settings import VERDE, CIAN, AMARILLO
+
 
 # NOTE: Declaramos las variables que tienen que ver con la API KEY de Marvel:
 
@@ -19,14 +24,21 @@ URL_BASE = 'http://gateway.marvel.com/v1/public/'
 ENDPOINT = 'comics'
 PARAMS = dict(ts=TS, apikey=PUBLIC_KEY, hash=HASHED.hexdigest())
 
-
+# NOTE: Agregamos los siguientes 3 decoradores
+# para que Swagger considere a la función como una 
+# vista de API y pueda ser visualizada en su UI.
+# @swagger_auto_schema(methods=['get'])
+# @api_view(['GET'])
+# @renderer_classes([TemplateHTMLRenderer])
 @csrf_exempt
 def get_comics(request):
     '''
+    ```
     Vista personalizada de API para comprar comics, 
     primero consultamos los comics disponibles en la página de Marvel, 
     luego generamos una lista de los que tienen precio y descripción, 
     porque varios vienen `null`.
+    ```
     '''
     # Declaramos nuestras variables:
     id = []
@@ -109,7 +121,7 @@ def get_comics(request):
         </td>
         <td><h2>U$S{price}</h2></td>
         <td>
-            <form action="/e-commerce/purchased_item/" method="post" , style ="visibility: {visibility};">
+            <form action="/e-commerce/purchased-item/" method="post" , style ="visibility: {visibility};">
                 <label for="qty"><h3>Enter Quantity:</h3></label>
                 <input type="number" id="qty" name="qty" min="0" max="15">
                 <input type="submit" value="Buy" >
@@ -131,13 +143,13 @@ def get_comics(request):
     <table style="width:100%">
         <tr>
             <td>
-                <form action="/e-commerce/get_comics/" method="get" style ="visibility: {visibility};">
+                <form action="/e-commerce/get-comics/" method="get" style ="visibility: {visibility};">
                     <input type="number" id="button" name="offset" value="{previous}" style="visibility: hidden;">
                     <input type="submit" value="PREV" >
                 </form>
             </td>
             <td>
-                <form action="/e-commerce/get_comics/" method="get" style ="visibility: visible;">
+                <form action="/e-commerce/get-comics/" method="get" style ="visibility: visible;">
                     <input type="number" id="button" name="offset" value="{next}" style="visibility: hidden;">
                     <input type="submit" value="NEXT" >
                 </form>
@@ -154,9 +166,6 @@ def get_comics(request):
     return HttpResponse(template)
 
 
-
-
-# @api_view(['GET']) NOTE: Usar este la primera parte de la clase de APIS!
 @csrf_exempt
 def purchased_item(request):
     '''Incluye la lógica de guardar lo pedido en la base de datos 
@@ -170,23 +179,23 @@ def purchased_item(request):
     qty = request.POST.get('qty')
     id = request.POST.get('id')
 
-    # TODO: Construimos la Query:
-    # Verificamos que el comic no se encuentra en nuestro stock:
-
-    queryset = Comic.objects.filter(marvel_id=id)
-
-    if len(queryset.values_list()) == 0 :
-        # Si el resultado nos trae una lista vacía, creamos un nuevo registro:
-        item = Comic(title=title, description=description, price=price,
-                    stock_qty=qty, picture=thumbnail, marvel_id=id)
-        print(CIAN,queryset)
-        item.save()
-    else:
-        # Si el comic está registrado, actualizamos su cantidad:
-        comic = Comic.objects.get(marvel_id=id)
-        actual_stock = comic.stock_qty
-        actual_stock += int(qty)
-        Comic.objects.filter(marvel_id=id).update(stock_qty=actual_stock)
+    # Verificamos si el comic no se encuentra en nuestro stock.
+    # Para eso hacemos uso del método ".get_or_create()".
+    # En caso de existir, actualizamos su cantidad.
+    _comic, _created = Comic.objects.get_or_create(
+        marvel_id=id,
+        defaults={
+            'title': title,
+            'description': description,
+            'price': price,
+            'stock_qty': qty,
+            'picture': thumbnail,
+            'marvel_id': id
+        }
+    )
+    if not _created:
+        _comic.stock_qty += int(qty)
+        _comic.save()
 
     # NOTE: Construimos la respuesta
     # Calculamos el precio total:
