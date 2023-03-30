@@ -19,10 +19,11 @@
 
 {% if user.is_superuser %}
     <h2>Bienvenido superusuario {{user.username}}</h2>
-{% elif user.username != None %}
+{% comment %} AnonymousUser {% endcomment %}
+{% elif user.username != '' %}  
     <h2>Bienvenido {{user.username}}</h2>
 {% else %}
-    <h2>Usuario no registrado, por favor, inicie sesión para poder navegar.</h2>
+    <h2>Usuario no registrado --> AnonymousUser, por favor, inicie sesión para poder navegar.</h2>
 {% endif %}
 
 <p>Para más información de "tag if" <a
