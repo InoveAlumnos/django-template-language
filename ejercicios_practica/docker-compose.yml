@@ -2,7 +2,6 @@ version: "3.3"
 # Este es un archivo de docker-compose.yml para configurar el uso de contenedores de software.
 
 services:
-
   db:
     # Este servicio crea una base de datos de tipo Postgres.
     image: postgres:13.2
@@ -12,7 +11,6 @@ services:
       # Aquí se enlaza el contenido de dentro del contenedor con el directorio en nuestra PC
       # de esa manera lo que guardemos en la base de datos va a quedar accesible en nuestra carpeta.
       - ./database:/var/lib/postgresql/data
-
     environment:
       # Postgres nos exige que establezcamos un usuario por defecto, esto se hace por medio
       # de variables de entorno. Según el hub de Postgres:
@@ -31,18 +29,21 @@ services:
     image: adminer:4.8.0
     restart: always
     ports:
-
       - 8080:8080
     # depends_on indica que este servicio depende de que primero inicie "db"
     depends_on: ["db"]
 
-  modulo_6:
+  modulo_5:
     # build es el lugar desde donde toma los archivos para generar la imagen.
-    build: .
+    # Toma como contexto de trabajo el directorio donde está el docker-compose.yml (.)
+    # y busca el archivo "dockerfile".
+    build:
+      context: .
+      dockerfile: dockerfile
     # Imágen a utilizar:
-    image: modulo_6
+    image: modulo_5
     # Nombre del container:
-    container_name: modulo_6
+    container_name: modulo_5_tp
     # Comportamiento ante fallos y al iniciar el sistema:
     restart: always
     # Carpetas enlazadas:
@@ -57,5 +58,6 @@ services:
     # Control de consola:
     stdin_open: true
     tty: true
-    depends_on: ["db"] 
-    command: python marvel/manage.py runserver 0.0.0.0:8000
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - db

@@ -4,7 +4,11 @@ django-filter==2.4.0
 djangorestframework==3.12.4
 django-rest-auth==0.9.5
 # Swagger:
-uritemplate==3.0.1
-pyyaml==5.4.1
-# Drivers para trabajar con Postgres en linux:
+drf-yasg==1.21.0
+# Adaptador de la base de datos relacional PostgreSQL para Python.
 psycopg2-binary>=2.8
+# Toolkit que permite aprovechar al máximo el uso interactivo de Python.
+# Muy útil cuando utilizemos el shell de Django.
+ipython==8.8.0
+#####
+django-cors-headers==3.14.0
