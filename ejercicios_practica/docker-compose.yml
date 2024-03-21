@@ -5,7 +5,6 @@ services:
   db:
     # Este servicio crea una base de datos de tipo Postgres.
     image: postgres:13.2
-    container_name: marvel_database
     volumes:
       # Aquí se enlaza el contenido de dentro del contenedor con el directorio en nuestra PC
       # de esa manera lo que guardemos en la base de datos va a quedar accesible en nuestra carpeta.
@@ -24,7 +23,6 @@ services:
   adminer:
     # Una interfaz para monitoreo y gestión de nuestra base de datos.
     # Se puede acceder a ella en localhost:8080
-    container_name: marvel_adminer
     image: adminer:4.8.0
     ports:
       - 8080:8080
